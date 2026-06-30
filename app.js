@@ -284,16 +284,18 @@
     return `
       <article class="slide">
         ${slideHeader(slide)}
-        <section class="slide-body scenario">
-          <div class="scenario-box">
+        <section class="slide-body scenario scenario-visual">
+          ${renderScenarioArt(slide.visual)}
+          <div class="scenario-content">
+            <div class="scenario-box">
             <div class="label">情境</div>
             <div class="scenario-text">${escapeHtml(slide.setup)}</div>
             <div class="action">建議動作：${escapeHtml(slide.action)}</div>
-          </div>
-          <div class="scenario-side">
-            ${renderScenarioArt(slide.visual)}
+            </div>
+            <div class="scenario-side">
             <h3>紅旗訊號</h3>
             ${bullets(slide.redFlags)}
+            </div>
           </div>
         </section>
         ${notes(slide)}
