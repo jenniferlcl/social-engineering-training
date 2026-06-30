@@ -10,12 +10,15 @@
   const prevButton = document.getElementById("prevButton");
   const nextButton = document.getElementById("nextButton");
   const speakerMode = document.getElementById("speakerMode");
+  const notesLayoutToggle = document.getElementById("notesLayoutToggle");
+  const notesPanel = document.getElementById("notesPanel");
   const menuButton = document.getElementById("menuButton");
   const overviewButton = document.getElementById("overviewButton");
   const printButton = document.getElementById("printButton");
   const overviewDialog = document.getElementById("overviewDialog");
   const overviewGrid = document.getElementById("overviewGrid");
   const closeOverview = document.getElementById("closeOverview");
+  let notesLayout = "side";
 
   function escapeHtml(value) {
     return String(value)
@@ -55,12 +58,21 @@
   }
 
   function notes(slide) {
-    if (!slide.notes || !slide.notes.length) return "";
-    return `
-      <aside class="speaker-notes">
-        <h3>講者備忘錄</h3>
-        ${slide.notes.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}
-      </aside>
+    return "";
+  }
+
+  function renderNotesPanel(slide) {
+    const noteLines = slide.notes || [];
+    notesPanel.innerHTML = `
+      <div class="notes-panel-header">
+        <span>講者備忘錄</span>
+        <strong>${escapeHtml(slide.title)}</strong>
+      </div>
+      <div class="notes-panel-body">
+        ${noteLines.length
+          ? noteLines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")
+          : "<p>本頁沒有備忘錄。</p>"}
+      </div>
     `;
   }
 
@@ -467,7 +479,9 @@
     const slide = slides[current];
     const renderer = renderers[slide.type] || renderChecklist;
     shell.innerHTML = renderer(slide, current);
-    shell.classList.toggle("speaker-enabled", speakerMode.checked);
+    renderNotesPanel(slide);
+    document.body.classList.toggle("speaker-enabled", speakerMode.checked);
+    document.body.dataset.notesLayout = notesLayout;
     counter.textContent = `${current + 1} / ${slides.length}`;
     progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
     prevButton.disabled = current === 0;
@@ -520,6 +534,15 @@
   prevButton.addEventListener("click", () => go(current - 1));
   nextButton.addEventListener("click", () => go(current + 1));
   speakerMode.addEventListener("change", render);
+  notesLayoutToggle.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-notes-layout]");
+    if (!button) return;
+    notesLayout = button.dataset.notesLayout;
+    for (const item of notesLayoutToggle.querySelectorAll("button")) {
+      item.classList.toggle("active", item === button);
+    }
+    render();
+  });
   menuButton.addEventListener("click", () => {
     if (window.matchMedia("(max-width: 980px)").matches) {
       document.body.classList.toggle("sidebar-open");

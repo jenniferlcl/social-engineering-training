@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="企業社交工程資安意識訓練網頁簡報">
   <title>社交工程資安意識訓練</title>
-  <link rel="stylesheet" href="styles.css?v=20260630-illustrations1">
+  <link rel="stylesheet" href="styles.css?v=20260630-speaker1">
 </head>
 <body>
   <div class="app">
@@ -32,9 +32,16 @@
           <input type="checkbox" id="speakerMode">
           <span>講者模式</span>
         </label>
+        <div class="notes-layout-toggle" id="notesLayoutToggle" aria-label="講者備忘錄位置">
+          <button class="active" data-notes-layout="side" type="button">右側面板</button>
+          <button data-notes-layout="drawer" type="button">下方抽屜</button>
+        </div>
       </header>
 
-      <section class="slide-shell" id="slideShell" aria-live="polite"></section>
+      <section class="presenter-workspace" id="presenterWorkspace">
+        <section class="slide-shell" id="slideShell" aria-live="polite"></section>
+        <aside class="notes-panel" id="notesPanel" aria-live="polite"></aside>
+      </section>
 
       <footer class="controls">
         <button id="prevButton" type="button">上一頁</button>
@@ -52,7 +59,7 @@
     <div class="overview-grid" id="overviewGrid"></div>
   </dialog>
 
-  <script src="slides.js?v=20260630-illustrations1"></script>
-  <script src="app.js?v=20260630-illustrations1"></script>
+  <script src="slides.js?v=20260630-speaker1"></script>
+  <script src="app.js?v=20260630-speaker1"></script>
 </body>
 </html>
