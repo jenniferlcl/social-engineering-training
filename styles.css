@@ -723,6 +723,18 @@ button {
   min-height: 100%;
 }
 
+.scenario-illustration {
+  margin: 0;
+  padding: 0;
+}
+
+.scenario-illustration img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
 .mail-top {
   display: flex;
   gap: 7px;

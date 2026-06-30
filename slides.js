@@ -156,6 +156,7 @@ window.TRAINING_DECK = {
       title: "案例 1：財務部收到供應商改帳通知",
       setup: "『因銀行整併，請自本月起改匯以下新帳戶。今天 15:00 前需完成，否則出貨延後。』",
       visual: "invoice",
+      image: "assets/scenarios/bec-supplier-change.png",
       redFlags: ["改付款帳戶", "限時完成", "信中給新電話", "語氣很像真的供應商"],
       action: "依採購與財務流程，用既有通訊錄或合約聯絡窗口雙重查證。",
       notes: [
@@ -170,6 +171,7 @@ window.TRAINING_DECK = {
       title: "案例 2：假 Microsoft 365 登入通知",
       setup: "『您的信箱容量已滿，請立即登入延長容量，否則 24 小時內停用。』",
       visual: "login",
+      image: "assets/scenarios/fake-login.png",
       redFlags: ["網域相似但不一致", "要求輸入帳密", "威脅停用服務", "不像公司 SSO"],
       action: "不要點信中連結，改從瀏覽器書籤或公司入口網站進入。",
       notes: [
@@ -184,6 +186,7 @@ window.TRAINING_DECK = {
       title: "案例 3：電話冒充 IT 要求 MFA code",
       setup: "『我是資訊部，正在修復你的帳號同步問題。你會收到一組驗證碼，麻煩唸給我。』",
       visual: "phone",
+      image: "assets/scenarios/mfa-phone-scam.png",
       redFlags: ["索取 MFA code", "假冒內部 IT", "要求立即配合", "把驗證碼說成修復碼"],
       action: "MFA code 只能由本人登入使用，不可提供給任何人；掛斷後用內部管道回報。",
       notes: [
@@ -198,6 +201,7 @@ window.TRAINING_DECK = {
       title: "案例 4：QR code 釣魚",
       setup: "會議室門口或電子郵件中出現 QR code：『掃碼查看會議資料 / 停車繳費 / 包裹狀態』。",
       visual: "qr",
+      image: "assets/scenarios/qr-phishing.png",
       redFlags: ["掃碼前看不到目的地", "要求重新登入", "來源不明", "手機較難檢查網址"],
       action: "掃碼後先確認網址；若要登入公司帳號，改用官方 App 或入口網站。",
       notes: [

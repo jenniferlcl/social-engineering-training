@@ -236,7 +236,15 @@
     `;
   }
 
-  function renderScenarioArt(type) {
+  function renderScenarioArt(slide) {
+    if (slide.image) {
+      return `
+        <figure class="scenario-illustration scenario-art">
+          <img src="${escapeHtml(slide.image)}" alt="${escapeHtml(slide.title)}情境插圖">
+        </figure>
+      `;
+    }
+    const type = slide.visual;
     const art = {
       invoice: `
         <div class="scenario-art mail-art" aria-label="供應商改帳郵件示意">
@@ -285,7 +293,7 @@
       <article class="slide">
         ${slideHeader(slide)}
         <section class="slide-body scenario scenario-visual">
-          ${renderScenarioArt(slide.visual)}
+          ${renderScenarioArt(slide)}
           <div class="scenario-content">
             <div class="scenario-box">
             <div class="label">情境</div>
