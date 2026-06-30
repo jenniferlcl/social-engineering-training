@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="企業社交工程資安意識訓練網頁簡報">
+  <title>社交工程資安意識訓練</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="eyebrow">企業資安意識訓練</div>
+        <h1>社交工程防護實戰</h1>
+        <p>網頁簡報版 · v1.0 · 2026-06-30</p>
+      </div>
+      <nav class="toc" id="toc" aria-label="投影片目錄"></nav>
+      <div class="sidebar-footer">
+        <button class="ghost" id="overviewButton" type="button">總覽</button>
+        <button class="ghost" id="printButton" type="button">列印</button>
+      </div>
+    </aside>
+
+    <main class="stage" id="stage">
+      <header class="topbar">
+        <button class="icon-button" id="menuButton" type="button" aria-label="切換目錄">☰</button>
+        <div class="progress" aria-label="閱讀進度">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <label class="mode-toggle">
+          <input type="checkbox" id="speakerMode">
+          <span>講者模式</span>
+        </label>
+      </header>
+
+      <section class="slide-shell" id="slideShell" aria-live="polite"></section>
+
+      <footer class="controls">
+        <button id="prevButton" type="button">上一頁</button>
+        <div class="counter" id="counter"></div>
+        <button id="nextButton" type="button">下一頁</button>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="overviewDialog">
+    <div class="dialog-header">
+      <h2>投影片總覽</h2>
+      <button class="icon-button" id="closeOverview" type="button" aria-label="關閉">×</button>
+    </div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </dialog>
+
+  <script src="slides.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
