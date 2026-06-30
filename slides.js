@@ -50,16 +50,56 @@ window.TRAINING_DECK = {
       type: "metrics",
       title: "威脅趨勢：人仍是主要攻擊入口",
       metrics: [
-        ["高", "人為因素", "社交工程、憑證竊取與錯誤操作持續出現在重大資安事件中。"],
-        ["快", "AI 加速", "攻擊訊息更自然、客製化更快，不能再只靠文法錯誤辨識。"],
-        ["近", "工作流程", "攻擊內容常偽裝成發票、登入、主管要求、供應商通知。"],
+        ["高", "人為因素", "Verizon DBIR 2026 指出常見資料外洩原因仍高度涉及人為因素，例如社交工程、釣魚與憑證濫用。"],
+        ["快", "AI 加速", "攻擊訊息更自然、客製化更快，攻擊者能更快寫出像同事、主管或供應商的語氣。"],
+        ["近", "工作流程", "FBI IC3 2024 顯示 BEC 損失達 27.7 億美元，攻擊常直接鎖定付款、採購與核准流程。"],
       ],
-      foot: "參考：Verizon DBIR、CISA phishing guidance、Microsoft Digital Defense Report。",
+      foot: "參考：Verizon DBIR 2026、FBI IC3 2024、Proofpoint State of the Phish、IBM Cost of a Data Breach 2025。",
       notes: [
         "本頁目的：用趨勢而非堆疊數字說明為何這個主題持續重要。",
-        "背景知識：近年資料外洩報告反覆指出，人為因素、憑證濫用與社交工程在事件中占有重要位置。AI 也讓釣魚內容更自然、語氣更像真人、客製化成本更低。",
+        "背景知識：近年資料外洩報告反覆指出，人為因素、憑證濫用與社交工程在事件中占有重要位置。FBI IC3 2024 也顯示商務郵件詐騙仍造成大額財損。",
         "講解重點：不要讓學員以為只要看文法錯誤就能辨識釣魚。現在更應檢查來源、網址、附件、要求的行動，以及是否要求繞過流程。",
-        "來源說明：本課程參考 Verizon DBIR、CISA 社交工程與釣魚防護建議、Microsoft Digital Defense Report、NIST Phish Scale 等公開資料。",
+        "來源說明：本頁引用公開報告重點，下一頁會把數字整理成市場數據快照，方便講者對管理層或一般同仁說明訓練必要性。",
+      ],
+    },
+    {
+      type: "reportStats",
+      title: "市場數據快照：社交工程不是小眾事件",
+      stats: [
+        {
+          value: "193,407",
+          label: "phishing / spoofing 投訴",
+          source: "FBI IC3 2024",
+          detail: "FBI IC3 2024 將 phishing/spoofing 列為投訴件數最高的犯罪類型之一。",
+          level: 92,
+        },
+        {
+          value: "27.7億美元",
+          label: "BEC 年度損失",
+          source: "FBI IC3 2024",
+          detail: "商務郵件詐騙直接影響付款、供應商與主管核准流程。",
+          level: 86,
+        },
+        {
+          value: "70%+",
+          label: "員工承認有風險行為",
+          source: "Proofpoint State of the Phish",
+          detail: "高比例員工曾做出可能暴露組織的風險行為，表示訓練要貼近日常情境。",
+          level: 72,
+        },
+        {
+          value: "440萬美元",
+          label: "資料外洩平均成本",
+          source: "IBM 2025",
+          detail: "IBM 2025 估計全球資料外洩平均成本為 440 萬美元，事件成本遠高於訓練成本。",
+          level: 78,
+        },
+      ],
+      notes: [
+        "本頁目的：用市場調查數字強化訓練必要性，讓學員理解社交工程不是少數個案，而是大量發生且有實際成本的企業風險。",
+        "背景知識：FBI IC3 2024 顯示 phishing/spoofing 投訴達 193,407 件，Business Email Compromise 損失約 27.7 億美元。Proofpoint 報告指出超過 70% 員工承認有風險行為。IBM 2025 則估計全球資料外洩平均成本為 440 萬美元。",
+        "講解重點：這些數字不代表每家公司都會遇到同樣損失，但能說明攻擊者持續大量嘗試，且一旦命中付款、帳號或資料流程，影響會快速放大。",
+        "轉場提示：有了數據之後，下一步要看攻擊者如何一步步把一封訊息變成入侵或詐騙事件。",
       ],
     },
     {
@@ -115,6 +155,7 @@ window.TRAINING_DECK = {
       type: "scenario",
       title: "案例 1：財務部收到供應商改帳通知",
       setup: "『因銀行整併，請自本月起改匯以下新帳戶。今天 15:00 前需完成，否則出貨延後。』",
+      visual: "invoice",
       redFlags: ["要求變更付款帳戶", "時間壓力", "信中提供新聯絡電話", "語氣像真的合作供應商"],
       action: "依採購與財務流程，用既有通訊錄或合約聯絡窗口雙重查證。",
       notes: [
@@ -128,6 +169,7 @@ window.TRAINING_DECK = {
       type: "scenario",
       title: "案例 2：假 Microsoft 365 登入通知",
       setup: "『您的信箱容量已滿，請立即登入延長容量，否則 24 小時內停用。』",
+      visual: "login",
       redFlags: ["連結網域相似但不一致", "要求輸入帳密", "威脅停用服務", "登入頁沒有公司 SSO 慣用特徵"],
       action: "不要點信中連結，改從瀏覽器書籤或公司入口網站進入。",
       notes: [
@@ -141,6 +183,7 @@ window.TRAINING_DECK = {
       type: "scenario",
       title: "案例 3：電話冒充 IT 要求 MFA code",
       setup: "『我是資訊部，正在修復你的帳號同步問題。你會收到一組驗證碼，麻煩唸給我。』",
+      visual: "phone",
       redFlags: ["要求提供 MFA code", "假冒內部 IT", "要求立即配合", "把驗證碼說成同步碼或修復碼"],
       action: "MFA code 只能由本人登入使用，不可提供給任何人；掛斷後用內部管道回報。",
       notes: [
@@ -154,6 +197,7 @@ window.TRAINING_DECK = {
       type: "scenario",
       title: "案例 4：QR code 釣魚",
       setup: "會議室門口或電子郵件中出現 QR code：『掃碼查看會議資料 / 停車繳費 / 包裹狀態』。",
+      visual: "qr",
       redFlags: ["掃碼前看不到目的地", "要求重新登入", "場景合理但來源不明", "手機上較難檢查網址"],
       action: "掃碼後先確認網址；若要登入公司帳號，改用官方 App 或入口網站。",
       notes: [
@@ -317,6 +361,9 @@ window.TRAINING_DECK = {
       title: "參考來源與後續建議",
       sources: [
         "Verizon Data Breach Investigations Report, 2026",
+        "FBI Internet Crime Report, 2024",
+        "Proofpoint State of the Phish, 2025",
+        "IBM Cost of a Data Breach Report, 2025",
         "CISA: Avoiding Social Engineering and Phishing Attacks",
         "Microsoft Digital Defense Report, 2025",
         "NIST Phish Scale / phishing training research",

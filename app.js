@@ -125,17 +125,56 @@
     return `
       <article class="slide">
         ${slideHeader(slide)}
-        <section class="slide-body cards-3">
-          ${slide.metrics.map(([big, title, body]) => `
-            <div class="metric">
-              <strong>${escapeHtml(big)}</strong>
-              <h3>${escapeHtml(title)}</h3>
-              <p>${escapeHtml(body)}</p>
+        <section class="slide-body metrics-layout">
+          <div class="cards-3">
+            ${slide.metrics.map(([big, title, body]) => `
+              <div class="metric">
+                <strong>${escapeHtml(big)}</strong>
+                <h3>${escapeHtml(title)}</h3>
+                <p>${escapeHtml(body)}</p>
+              </div>
+            `).join("")}
+          </div>
+          <div class="threat-dashboard" aria-label="威脅趨勢示意圖">
+            <div class="dashboard-title">攻擊壓力集中在人的決策瞬間</div>
+            <div class="dashboard-flow">
+              <span>訊息</span>
+              <span>信任</span>
+              <span>行動</span>
+              <strong>風險</strong>
             </div>
-          `).join("")}
+            <div class="dashboard-bars">
+              <i style="height: 42%"></i>
+              <i style="height: 66%"></i>
+              <i style="height: 82%"></i>
+              <i style="height: 58%"></i>
+              <i style="height: 76%"></i>
+            </div>
+          </div>
         </section>
         <p class="slide-footer">${escapeHtml(slide.foot)}</p>
         ${notes(slide)}
+      </article>
+    `;
+  }
+
+  function renderReportStats(slide, index) {
+    return `
+      <article class="slide">
+        ${slideHeader(slide)}
+        <section class="slide-body report-grid">
+          ${slide.stats.map((stat) => `
+            <div class="report-stat">
+              <div class="stat-source">${escapeHtml(stat.source)}</div>
+              <strong>${escapeHtml(stat.value)}</strong>
+              <h3>${escapeHtml(stat.label)}</h3>
+              <p>${escapeHtml(stat.detail)}</p>
+              <div class="stat-bar"><span style="width: ${Number(stat.level) || 0}%"></span></div>
+            </div>
+          `).join("")}
+        </section>
+        ${notes(slide)}
+        ${footer(index)}
       </article>
     `;
   }
@@ -197,6 +236,50 @@
     `;
   }
 
+  function renderScenarioArt(type) {
+    const art = {
+      invoice: `
+        <div class="scenario-art mail-art" aria-label="供應商改帳郵件示意">
+          <div class="mail-top"><span></span><span></span><span></span></div>
+          <div class="mail-subject">Bank account update</div>
+          <div class="mail-line wide"></div>
+          <div class="mail-line"></div>
+          <div class="fake-button">匯款資料</div>
+          <div class="warning-strip">改帳 + 限時 + 新電話</div>
+        </div>
+      `,
+      login: `
+        <div class="scenario-art login-art" aria-label="假登入頁示意">
+          <div class="login-logo">365</div>
+          <div class="login-input"></div>
+          <div class="login-input short"></div>
+          <div class="login-button">Sign in</div>
+          <div class="fake-url">microsoft-login.example</div>
+        </div>
+      `,
+      phone: `
+        <div class="scenario-art phone-art" aria-label="電話要求 MFA code 示意">
+          <div class="phone-body">
+            <div class="phone-speaker"></div>
+            <div class="phone-bubble">請唸出驗證碼</div>
+            <div class="mfa-code">482 901</div>
+            <div class="phone-actions"><span></span><span></span></div>
+          </div>
+        </div>
+      `,
+      qr: `
+        <div class="scenario-art qr-art" aria-label="QR code 釣魚示意">
+          <div class="qr-grid">
+            ${Array.from({ length: 49 }, (_, i) => `<span class="${i % 3 === 0 || i === 8 || i === 40 ? "dark" : ""}"></span>`).join("")}
+          </div>
+          <div class="fake-url">login.company-secure.example</div>
+          <div class="warning-strip">掃碼後先看網址</div>
+        </div>
+      `,
+    };
+    return art[type] || "";
+  }
+
   function renderScenario(slide, index) {
     return `
       <article class="slide">
@@ -207,7 +290,8 @@
             <div class="scenario-text">${escapeHtml(slide.setup)}</div>
             <div class="action">建議動作：${escapeHtml(slide.action)}</div>
           </div>
-          <div>
+          <div class="scenario-side">
+            ${renderScenarioArt(slide.visual)}
             <h3>紅旗訊號</h3>
             ${bullets(slide.redFlags)}
           </div>
@@ -354,6 +438,7 @@
     agenda: renderAgenda,
     statement: renderStatement,
     metrics: renderMetrics,
+    reportStats: renderReportStats,
     process: renderProcess,
     twoCol: renderTwoCol,
     taxonomy: renderTaxonomy,
