@@ -30,6 +30,11 @@
 https://<github-user>.github.io/social-engineering-training/
 ```
 
+目前測試部署網址：
+
+- GitHub Pages: <https://jenniferlcl.github.io/social-engineering-training/>
+- Netlify: <https://bucolic-queijadas-0244f4.netlify.app/>
+
 ## GitHub Pages 部署
 
 1. 建立 GitHub repository，例如 `social-engineering-training`
